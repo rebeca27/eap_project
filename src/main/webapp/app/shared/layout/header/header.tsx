@@ -28,13 +28,6 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
     menuOpen: false
   };
 
-  renderDevRibbon = () =>
-    this.props.isInProduction === false ? (
-      <div className="ribbon dev">
-        <a href="">Development</a>
-      </div>
-    ) : null;
-
   toggleMenu = () => {
     this.setState({ menuOpen: !this.state.menuOpen });
   };
@@ -46,7 +39,6 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
 
     return (
       <div id="app-header">
-        {this.renderDevRibbon()}
         <LoadingBar className="loading-bar" />
         <Navbar dark expand="sm" fixed="top" className="jh-navbar">
           <NavbarToggler aria-label="Menu" onClick={this.toggleMenu} />
