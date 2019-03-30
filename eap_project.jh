@@ -1,0 +1,72 @@
+
+
+entity Company {
+	name String required minlength(1) maxlength(64)
+    cui String required minlength(9) maxlength(9)
+}
+
+
+entity Department {
+	departmentName String required minlength(1) maxlength(128)
+}
+
+entity Employee {
+	firstName String required minlength(1) maxlength(64),
+	lastName String required minlength(1) maxlength(64),
+    cnp String required minlength(13) maxlength(13),
+	email String maxlength(128),
+	phoneNumber String maxlength(32),
+	hireDate Instant,
+	salary Long required
+}
+
+enum JobType {
+	PART_TIME, FULL_TIME
+}
+
+entity Job {
+	jobTitle String required minlength(1) maxlength(128),
+	minSalary Long,
+	maxSalary Long,
+    typeType JobType required
+}
+
+entity Holiday {
+	startDate Instant required,
+    endDate Instant required,
+    workingDays Integer required,
+    remarks String maxlength(255)
+}
+
+entity RestLeaveHoliday {
+	
+}
+
+entity SickLeaveHoliday {
+	reason String maxlength(255)
+}
+
+relationship OneToOne {
+	Employee{job} to Job,
+    Holiday{restLeaveHoliday} to RestLeaveHoliday,
+    Holiday{sickLeaveHoliday} to SickLeaveHoliday
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Company{department} to Department,
+    Company{employee} to Employee,
+    Company{job} to Job,
+    Employee{employee} to Holiday,
+	Department{employee} to Employee,
+    Department{job} to Job
+}
+
+// Set pagination options
+paginate Job, Department, Employee, Holiday, Company with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Employee, Job
