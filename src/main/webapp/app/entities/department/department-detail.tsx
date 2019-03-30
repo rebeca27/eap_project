@@ -33,7 +33,7 @@ export class DepartmentDetail extends React.Component<IDepartmentDetailProps> {
             </dt>
             <dd>{departmentEntity.departmentName}</dd>
             <dt>Company</dt>
-            <dd>{departmentEntity.company ? departmentEntity.company.id : ''}</dd>
+            <dd>{departmentEntity.company ? `${departmentEntity.company.name} (CUI: ${departmentEntity.company.cui})` : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/department" replace color="info">
             <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

@@ -84,7 +84,13 @@ export class Department extends React.Component<IDepartmentProps, IDepartmentSta
                     </Button>
                   </td>
                   <td>{department.departmentName}</td>
-                  <td>{department.company ? <Link to={`company/${department.company.id}`}>{department.company.id}</Link> : ''}</td>
+                  <td>
+                    {department.company ? (
+                      <Link to={`company/${department.company.id}`}>{`${department.company.name} (CUI: ${department.company.cui})`}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${department.id}`} color="info" size="sm">

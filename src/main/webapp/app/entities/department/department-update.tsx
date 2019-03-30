@@ -113,7 +113,7 @@ export class DepartmentUpdate extends React.Component<IDepartmentUpdateProps, ID
                     {companies
                       ? companies.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {`${otherEntity.name} (CUI: ${otherEntity.cui})`}
                           </option>
                         ))
                       : null}
