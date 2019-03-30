@@ -40,6 +40,19 @@ public class CacheConfiguration {
             cm.createCache(com.eap.project.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.eap.project.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.eap.project.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Company.class.getName(), jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Company.class.getName() + ".departments", jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Company.class.getName() + ".employees", jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Company.class.getName() + ".jobs", jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Department.class.getName(), jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Department.class.getName() + ".employees", jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Department.class.getName() + ".jobs", jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Employee.class.getName(), jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Employee.class.getName() + ".employees", jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Job.class.getName(), jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.Holiday.class.getName(), jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.RestLeaveHoliday.class.getName(), jcacheConfiguration);
+            cm.createCache(com.eap.project.domain.SickLeaveHoliday.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

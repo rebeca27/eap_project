@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Holiday.
+    -->
+    <changeSet id="20190330133732-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="holiday"
+                                 constraintName="fk_holiday_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="rest_leave_holiday_id"
+                                 baseTableName="holiday"
+                                 constraintName="fk_holiday_rest_leave_holiday_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rest_leave_holiday"/>
+
+        <addForeignKeyConstraint baseColumnNames="sick_leave_holiday_id"
+                                 baseTableName="holiday"
+                                 constraintName="fk_holiday_sick_leave_holiday_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sick_leave_holiday"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,14 @@
+{
+    "name": "RestLeaveHoliday",
+    "fields": [],
+    "relationships": [],
+    "changelogDate": "20190330133733",
+    "entityTableName": "rest_leave_holiday",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

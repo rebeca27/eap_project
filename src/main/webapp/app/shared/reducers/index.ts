@@ -13,6 +13,34 @@ import settings, { SettingsState } from 'app/modules/account/settings/settings.r
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
 import sessions, { SessionsState } from 'app/modules/account/sessions/sessions.reducer';
 // prettier-ignore
+// prettier-ignore
+import company, {
+  CompanyState
+} from 'app/entities/company/company.reducer';
+// prettier-ignore
+import department, {
+  DepartmentState
+} from 'app/entities/department/department.reducer';
+// prettier-ignore
+import employee, {
+  EmployeeState
+} from 'app/entities/employee/employee.reducer';
+// prettier-ignore
+import job, {
+  JobState
+} from 'app/entities/job/job.reducer';
+// prettier-ignore
+import holiday, {
+  HolidayState
+} from 'app/entities/holiday/holiday.reducer';
+// prettier-ignore
+import restLeaveHoliday, {
+  RestLeaveHolidayState
+} from 'app/entities/rest-leave-holiday/rest-leave-holiday.reducer';
+// prettier-ignore
+import sickLeaveHoliday, {
+  SickLeaveHolidayState
+} from 'app/entities/sick-leave-holiday/sick-leave-holiday.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -26,6 +54,13 @@ export interface IRootState {
   readonly password: PasswordState;
   readonly settings: SettingsState;
   readonly sessions: SessionsState;
+  readonly company: CompanyState;
+  readonly department: DepartmentState;
+  readonly employee: EmployeeState;
+  readonly job: JobState;
+  readonly holiday: HolidayState;
+  readonly restLeaveHoliday: RestLeaveHolidayState;
+  readonly sickLeaveHoliday: SickLeaveHolidayState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -41,6 +76,13 @@ const rootReducer = combineReducers<IRootState>({
   password,
   settings,
   sessions,
+  company,
+  department,
+  employee,
+  job,
+  holiday,
+  restLeaveHoliday,
+  sickLeaveHoliday,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });
