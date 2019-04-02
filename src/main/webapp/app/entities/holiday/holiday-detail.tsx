@@ -49,7 +49,7 @@ export class HolidayDetail extends React.Component<IHolidayDetailProps> {
             </dt>
             <dd>{holidayEntity.remarks}</dd>
             <dt>Employee</dt>
-            <dd>{holidayEntity.employee ? holidayEntity.employee.id : ''}</dd>
+            <dd>{holidayEntity.employee ? holidayEntity.employee.lastName : ''}</dd>
             <dt>Rest Leave Holiday</dt>
             <dd>{holidayEntity.restLeaveHoliday ? holidayEntity.restLeaveHoliday.id : ''}</dd>
             <dt>Sick Leave Holiday</dt>

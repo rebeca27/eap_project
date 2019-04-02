@@ -171,7 +171,7 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                     {employees
                       ? employees.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.lastName} {otherEntity.firstName}
                           </option>
                         ))
                       : null}
