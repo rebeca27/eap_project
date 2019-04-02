@@ -59,11 +59,11 @@ export class EmployeeDetail extends React.Component<IEmployeeDetailProps> {
             </dt>
             <dd>{employeeEntity.salary}</dd>
             <dt>Company</dt>
-            <dd>{employeeEntity.company ? employeeEntity.company.id : ''}</dd>
+            <dd>{employeeEntity.company ? `${employeeEntity.company.name} (CUI: ${employeeEntity.company.cui})` : ''}</dd>
             <dt>Department</dt>
-            <dd>{employeeEntity.department ? employeeEntity.department.id : ''}</dd>
+            <dd>{employeeEntity.department ? employeeEntity.department.departmentName : ''}</dd>
             <dt>Job</dt>
-            <dd>{employeeEntity.job ? employeeEntity.job.id : ''}</dd>
+            <dd>{employeeEntity.job ? employeeEntity.job.jobTitle : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/employee" replace color="info">
             <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

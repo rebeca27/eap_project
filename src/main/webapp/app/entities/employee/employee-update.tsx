@@ -209,7 +209,7 @@ export class EmployeeUpdate extends React.Component<IEmployeeUpdateProps, IEmplo
                     {companies
                       ? companies.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.name}
                           </option>
                         ))
                       : null}
@@ -222,7 +222,7 @@ export class EmployeeUpdate extends React.Component<IEmployeeUpdateProps, IEmplo
                     {departments
                       ? departments.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.departmentName}
                           </option>
                         ))
                       : null}
@@ -235,7 +235,7 @@ export class EmployeeUpdate extends React.Component<IEmployeeUpdateProps, IEmplo
                     {jobs
                       ? jobs.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.jobTitle}
                           </option>
                         ))
                       : null}

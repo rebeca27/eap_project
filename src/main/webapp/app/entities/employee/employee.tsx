@@ -116,9 +116,21 @@ export class Employee extends React.Component<IEmployeeProps, IEmployeeState> {
                     <TextFormat type="date" value={employee.hireDate} format={APP_DATE_FORMAT} />
                   </td>
                   <td>{employee.salary}</td>
-                  <td>{employee.company ? <Link to={`company/${employee.company.id}`}>{employee.company.id}</Link> : ''}</td>
-                  <td>{employee.department ? <Link to={`department/${employee.department.id}`}>{employee.department.id}</Link> : ''}</td>
-                  <td>{employee.job ? <Link to={`job/${employee.job.id}`}>{employee.job.id}</Link> : ''}</td>
+                  <td>
+                    {employee.company ? (
+                      <Link to={`company/${employee.company.id}`}>{`${employee.company.name} (CUI: ${employee.company.cui})`}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {employee.department ? (
+                      <Link to={`department/${employee.department.departmentName}`}>{employee.department.departmentName}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{employee.job ? <Link to={`job/${employee.job.jobTitle}`}>{employee.job.jobTitle}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${employee.id}`} color="info" size="sm">
