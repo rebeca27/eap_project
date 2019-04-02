@@ -143,7 +143,7 @@ export class JobUpdate extends React.Component<IJobUpdateProps, IJobUpdateState>
                     {companies
                       ? companies.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.name}
                           </option>
                         ))
                       : null}
@@ -156,7 +156,7 @@ export class JobUpdate extends React.Component<IJobUpdateProps, IJobUpdateState>
                     {departments
                       ? departments.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.departmentName}
                           </option>
                         ))
                       : null}

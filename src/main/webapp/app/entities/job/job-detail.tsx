@@ -45,9 +45,9 @@ export class JobDetail extends React.Component<IJobDetailProps> {
             </dt>
             <dd>{jobEntity.typeType}</dd>
             <dt>Company</dt>
-            <dd>{jobEntity.company ? jobEntity.company.id : ''}</dd>
+            <dd>{jobEntity.company ? jobEntity.company.name : ''}</dd>
             <dt>Department</dt>
-            <dd>{jobEntity.department ? jobEntity.department.id : ''}</dd>
+            <dd>{jobEntity.department ? jobEntity.department.departmentName : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/job" replace color="info">
             <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

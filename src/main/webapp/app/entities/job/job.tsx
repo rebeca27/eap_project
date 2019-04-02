@@ -99,8 +99,12 @@ export class Job extends React.Component<IJobProps, IJobState> {
                   <td>{job.minSalary}</td>
                   <td>{job.maxSalary}</td>
                   <td>{job.typeType}</td>
-                  <td>{job.company ? <Link to={`company/${job.company.id}`}>{job.company.id}</Link> : ''}</td>
-                  <td>{job.department ? <Link to={`department/${job.department.id}`}>{job.department.id}</Link> : ''}</td>
+                  <td>
+                    {job.company ? <Link to={`company/${job.company.name} (CUI: ${job.company.cui})}`}>{job.company.name}</Link> : ''}
+                  </td>
+                  <td>
+                    {job.department ? <Link to={`department/${job.department.departmentName}`}>{job.department.departmentName}</Link> : ''}
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${job.id}`} color="info" size="sm">
