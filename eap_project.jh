@@ -47,9 +47,7 @@ entity SickLeaveHoliday {
 }
 
 relationship OneToOne {
-	Employee{job} to Job,
-    Holiday{restLeaveHoliday} to RestLeaveHoliday,
-    Holiday{sickLeaveHoliday} to SickLeaveHoliday
+	Employee{job} to Job
 }
 
 // defining multiple OneToMany relationships with comments

@@ -14,17 +14,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
 
-        <addForeignKeyConstraint baseColumnNames="rest_leave_holiday_id"
-                                 baseTableName="holiday"
-                                 constraintName="fk_holiday_rest_leave_holiday_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="rest_leave_holiday"/>
-
-        <addForeignKeyConstraint baseColumnNames="sick_leave_holiday_id"
-                                 baseTableName="holiday"
-                                 constraintName="fk_holiday_sick_leave_holiday_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="sick_leave_holiday"/>
-
     </changeSet>
 </databaseChangeLog>

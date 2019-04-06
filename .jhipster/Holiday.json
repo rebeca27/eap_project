@@ -37,22 +37,6 @@
             "otherEntityName": "employee",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "restLeaveHoliday",
-            "otherEntityRelationshipName": "holiday",
-            "relationshipName": "restLeaveHoliday",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "sickLeaveHoliday",
-            "otherEntityRelationshipName": "holiday",
-            "relationshipName": "sickLeaveHoliday",
-            "otherEntityField": "id",
-            "ownerSide": true
         }
     ],
     "changelogDate": "20190330133732",

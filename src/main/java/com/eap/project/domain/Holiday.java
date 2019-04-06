@@ -17,8 +17,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "holiday")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Holiday implements Serializable {
+public abstract class Holiday implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -45,14 +46,6 @@ public class Holiday implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("employees")
     private Employee employee;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private RestLeaveHoliday restLeaveHoliday;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private SickLeaveHoliday sickLeaveHoliday;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -126,32 +119,6 @@ public class Holiday implements Serializable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public RestLeaveHoliday getRestLeaveHoliday() {
-        return restLeaveHoliday;
-    }
-
-    public Holiday restLeaveHoliday(RestLeaveHoliday restLeaveHoliday) {
-        this.restLeaveHoliday = restLeaveHoliday;
-        return this;
-    }
-
-    public void setRestLeaveHoliday(RestLeaveHoliday restLeaveHoliday) {
-        this.restLeaveHoliday = restLeaveHoliday;
-    }
-
-    public SickLeaveHoliday getSickLeaveHoliday() {
-        return sickLeaveHoliday;
-    }
-
-    public Holiday sickLeaveHoliday(SickLeaveHoliday sickLeaveHoliday) {
-        this.sickLeaveHoliday = sickLeaveHoliday;
-        return this;
-    }
-
-    public void setSickLeaveHoliday(SickLeaveHoliday sickLeaveHoliday) {
-        this.sickLeaveHoliday = sickLeaveHoliday;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

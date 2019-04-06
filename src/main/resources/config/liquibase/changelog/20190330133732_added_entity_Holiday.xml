@@ -41,11 +41,7 @@
             <column name="employee_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="rest_leave_holiday_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_holiday_rest_leave_holiday_id" />
-            </column>            <column name="sick_leave_holiday_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_holiday_sick_leave_holiday_id" />
-            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="holiday" columnName="start_date" columnDataType="datetime"/>

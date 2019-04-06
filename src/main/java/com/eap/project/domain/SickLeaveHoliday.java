@@ -15,8 +15,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "sick_leave_holiday")
+@PrimaryKeyJoinColumn(name = "id")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class SickLeaveHoliday implements Serializable {
+public class SickLeaveHoliday extends Holiday implements Serializable {
 
     private static final long serialVersionUID = 1L;
     

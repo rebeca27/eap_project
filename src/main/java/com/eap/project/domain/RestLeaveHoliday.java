@@ -14,8 +14,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "rest_leave_holiday")
+@PrimaryKeyJoinColumn(name = "id")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class RestLeaveHoliday implements Serializable {
+public class RestLeaveHoliday extends Holiday implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
