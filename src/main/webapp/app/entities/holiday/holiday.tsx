@@ -81,12 +81,6 @@ export class Holiday extends React.Component<IHolidayProps, IHolidayState> {
                 <th>
                   Employee <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  Rest Leave Holiday <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  Sick Leave Holiday <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -106,29 +100,7 @@ export class Holiday extends React.Component<IHolidayProps, IHolidayState> {
                   </td>
                   <td>{holiday.workingDays}</td>
                   <td>{holiday.remarks}</td>
-                  <td>
-                    {holiday.employee ? (
-                      <Link to={`employee/${holiday.employee.firstName} ${holiday.employee.lastName}}`}>
-                        {holiday.employee.firstName} {holiday.employee.lastName}
-                      </Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {holiday.restLeaveHoliday ? (
-                      <Link to={`rest-leave-holiday/${holiday.restLeaveHoliday.id}`}>{holiday.restLeaveHoliday.id}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {holiday.sickLeaveHoliday ? (
-                      <Link to={`sick-leave-holiday/${holiday.sickLeaveHoliday.id}`}>{holiday.sickLeaveHoliday.id}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
+                  <td>{holiday.employee ? <Link to={`employee/${holiday.employee.id}`}>{holiday.employee.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${holiday.id}`} color="info" size="sm">

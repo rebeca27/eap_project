@@ -41,6 +41,10 @@ import restLeaveHoliday, {
 import sickLeaveHoliday, {
   SickLeaveHolidayState
 } from 'app/entities/sick-leave-holiday/sick-leave-holiday.reducer';
+// prettier-ignore
+import holiday, {
+  HolidayState
+} from 'app/entities/holiday/holiday.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {

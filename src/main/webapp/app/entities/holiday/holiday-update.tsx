@@ -10,10 +10,6 @@ import { IRootState } from 'app/shared/reducers';
 
 import { IEmployee } from 'app/shared/model/employee.model';
 import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
-import { IRestLeaveHoliday } from 'app/shared/model/rest-leave-holiday.model';
-import { getEntities as getRestLeaveHolidays } from 'app/entities/rest-leave-holiday/rest-leave-holiday.reducer';
-import { ISickLeaveHoliday } from 'app/shared/model/sick-leave-holiday.model';
-import { getEntities as getSickLeaveHolidays } from 'app/entities/sick-leave-holiday/sick-leave-holiday.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './holiday.reducer';
 import { IHoliday } from 'app/shared/model/holiday.model';
 // tslint:disable-next-line:no-unused-variable
@@ -25,8 +21,6 @@ export interface IHolidayUpdateProps extends StateProps, DispatchProps, RouteCom
 export interface IHolidayUpdateState {
   isNew: boolean;
   employeeId: string;
-  restLeaveHolidayId: string;
-  sickLeaveHolidayId: string;
 }
 
 export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHolidayUpdateState> {
@@ -34,8 +28,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
     super(props);
     this.state = {
       employeeId: '0',
-      restLeaveHolidayId: '0',
-      sickLeaveHolidayId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -54,8 +46,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
     }
 
     this.props.getEmployees();
-    this.props.getRestLeaveHolidays();
-    this.props.getSickLeaveHolidays();
   }
 
   saveEntity = (event, errors, values) => {
@@ -82,7 +72,7 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
   };
 
   render() {
-    const { holidayEntity, employees, restLeaveHolidays, sickLeaveHolidays, loading, updating } = this.props;
+    const { holidayEntity, employees, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -171,32 +161,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                     {employees
                       ? employees.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.lastName} {otherEntity.firstName}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="restLeaveHoliday.id">Rest Leave Holiday</Label>
-                  <AvInput id="holiday-restLeaveHoliday" type="select" className="form-control" name="restLeaveHoliday.id">
-                    <option value="" key="0" />
-                    {restLeaveHolidays
-                      ? restLeaveHolidays.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="sickLeaveHoliday.id">Sick Leave Holiday</Label>
-                  <AvInput id="holiday-sickLeaveHoliday" type="select" className="form-control" name="sickLeaveHoliday.id">
-                    <option value="" key="0" />
-                    {sickLeaveHolidays
-                      ? sickLeaveHolidays.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.id}
                           </option>
                         ))
@@ -224,8 +188,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
 
 const mapStateToProps = (storeState: IRootState) => ({
   employees: storeState.employee.entities,
-  restLeaveHolidays: storeState.restLeaveHoliday.entities,
-  sickLeaveHolidays: storeState.sickLeaveHoliday.entities,
   holidayEntity: storeState.holiday.entity,
   loading: storeState.holiday.loading,
   updating: storeState.holiday.updating,
@@ -234,8 +196,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 
 const mapDispatchToProps = {
   getEmployees,
-  getRestLeaveHolidays,
-  getSickLeaveHolidays,
   getEntity,
   updateEntity,
   createEntity,

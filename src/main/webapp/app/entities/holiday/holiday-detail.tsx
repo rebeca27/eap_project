@@ -49,11 +49,7 @@ export class HolidayDetail extends React.Component<IHolidayDetailProps> {
             </dt>
             <dd>{holidayEntity.remarks}</dd>
             <dt>Employee</dt>
-            <dd>{holidayEntity.employee ? holidayEntity.employee.lastName : ''}</dd>
-            <dt>Rest Leave Holiday</dt>
-            <dd>{holidayEntity.restLeaveHoliday ? holidayEntity.restLeaveHoliday.id : ''}</dd>
-            <dt>Sick Leave Holiday</dt>
-            <dd>{holidayEntity.sickLeaveHoliday ? holidayEntity.sickLeaveHoliday.id : ''}</dd>
+            <dd>{holidayEntity.employee ? `${holidayEntity.employee.firstName} ${holidayEntity.employee.lastName}` : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/holiday" replace color="info">
             <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
