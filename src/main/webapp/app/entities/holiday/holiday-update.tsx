@@ -11,16 +11,19 @@ import { IRootState } from 'app/shared/reducers';
 import { IEmployee } from 'app/shared/model/employee.model';
 import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './holiday.reducer';
+import { getHolidayTypeList } from './holiday-type.reducer';
 import { IHoliday } from 'app/shared/model/holiday.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
+import { IHolidayType } from 'app/shared/model/holiday-type.model';
 
 export interface IHolidayUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export interface IHolidayUpdateState {
   isNew: boolean;
   employeeId: string;
+  holidayTypes: IHolidayType[];
 }
 
 export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHolidayUpdateState> {
@@ -28,7 +31,8 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
     super(props);
     this.state = {
       employeeId: '0',
-      isNew: !this.props.match.params || !this.props.match.params.id
+      isNew: !this.props.match.params || !this.props.match.params.id,
+      holidayTypes: getHolidayTypeList()
     };
   }
 
@@ -95,6 +99,45 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                   </AvGroup>
                 ) : null}
                 <AvGroup>
+                  <Label for="employee.id">Employee</Label>
+                  <AvInput id="holiday-employee" type="select" className="form-control" name="employee.id">
+                    <option value="" key="0" />
+                    {employees
+                      ? employees.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.firstName} {otherEntity.lastName} ({otherEntity.company.name})
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="holidayType">Holiday Type</Label>
+                  <AvInput id="holiday-type" type="select" className="form-control" name="holidayType">
+                    <option value="" key="0" />
+                    {this.state.holidayTypes
+                      ? this.state.holidayTypes.map(otherEntity => (
+                          <option value={otherEntity.type} key={otherEntity.type}>
+                            {otherEntity.name}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                {holidayEntity.type === 'sick_leave' ? (
+                  <AvGroup>
+                    <Label id="reasonLabel" for="reason">
+                      Reason
+                    </Label>
+                    <AvField
+                      id="holiday-reason"
+                      type="text"
+                      name="reason"
+                      validate={{ maxLength: { value: 255, errorMessage: 'This field cannot be longer than 255 characters.' } }}
+                    />
+                  </AvGroup>
+                ) : null}
+                <AvGroup>
                   <Label id="startDateLabel" for="startDate">
                     Start Date
                   </Label>
@@ -153,19 +196,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                       maxLength: { value: 255, errorMessage: 'This field cannot be longer than 255 characters.' }
                     }}
                   />
-                </AvGroup>
-                <AvGroup>
-                  <Label for="employee.id">Employee</Label>
-                  <AvInput id="holiday-employee" type="select" className="form-control" name="employee.id">
-                    <option value="" key="0" />
-                    {employees
-                      ? employees.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/holiday" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />

@@ -8,6 +8,8 @@ export interface IHoliday {
   workingDays?: number;
   remarks?: string;
   employee?: IEmployee;
+  type?: string;
+  reason?: string;
 }
 
 export const defaultValue: Readonly<IHoliday> = {};
