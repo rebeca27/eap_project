@@ -126,7 +126,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                     type="select"
                     className="form-control"
                     name="holidayType"
-                    ref="holiday-type"
                     onChange={this.disableReason.bind(this)}
                   >
                     <option value="" key="0" />
@@ -194,7 +193,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                     id="holiday-reason"
                     type="text"
                     name="reason"
-                    ref="reason"
                     disabled
                     validate={{ maxLength: { value: 255, errorMessage: 'This field cannot be longer than 255 characters.' } }}
                   />

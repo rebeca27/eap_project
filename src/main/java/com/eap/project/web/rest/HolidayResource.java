@@ -1,5 +1,10 @@
 package com.eap.project.web.rest;
+
+import com.eap.project.domain.Employee;
 import com.eap.project.domain.Holiday;
+import com.eap.project.domain.RestLeaveHoliday;
+import com.eap.project.domain.SickLeaveHoliday;
+import com.eap.project.domain.requests.HolidayRequest;
 import com.eap.project.service.HolidayService;
 import com.eap.project.web.rest.errors.BadRequestAlertException;
 import com.eap.project.web.rest.util.HeaderUtil;
@@ -39,31 +44,49 @@ public class HolidayResource {
     }
 
     /**
-     * POST  /holidays : Create a new holiday.
+     * POST /holidays : Create a new holiday.
      *
      * @param holiday the holiday to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new holiday, or with status 400 (Bad Request) if the holiday has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the
+     * new holiday, or with status 400 (Bad Request) if the holiday has already
+     * an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/holidays")
-    public ResponseEntity<Holiday> createHoliday(@Valid @RequestBody Holiday holiday) throws URISyntaxException {
-        log.debug("REST request to save Holiday : {}", holiday);
+    public ResponseEntity<Holiday> createHoliday(@Valid @RequestBody HolidayRequest holidayRequest) throws URISyntaxException {
+        log.debug("REST request to save Holiday : {}", holidayRequest);
+        Holiday holiday;
+
+        if (holidayRequest.getHolidayType().equals("sick_leave")) {
+            holiday = new SickLeaveHoliday();
+            ((SickLeaveHoliday) holiday).setReason(holidayRequest.getHolidayReason());
+        } else {
+            holiday = new RestLeaveHoliday();
+        }
+
+        holiday.setEmployee(holidayRequest.getEmployee());
+        holiday.setEndDate(holidayRequest.getEndDate());
+        holiday.setStartDate(holidayRequest.getStartDate());
+        holiday.setRemarks(holidayRequest.getRemarks());
+        holiday.setWorkingDays(holidayRequest.getWorkingDays());
+
         if (holiday.getId() != null) {
             throw new BadRequestAlertException("A new holiday cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Holiday result = holidayService.save(holiday);
         return ResponseEntity.created(new URI("/api/holidays/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
-     * PUT  /holidays : Updates an existing holiday.
+     * PUT /holidays : Updates an existing holiday.
      *
      * @param holiday the holiday to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated holiday,
-     * or with status 400 (Bad Request) if the holiday is not valid,
-     * or with status 500 (Internal Server Error) if the holiday couldn't be updated
+     * @return the ResponseEntity with status 200 (OK) and with body the updated
+     * holiday, or with status 400 (Bad Request) if the holiday is not valid, or
+     * with status 500 (Internal Server Error) if the holiday couldn't be
+     * updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/holidays")
@@ -74,15 +97,16 @@ public class HolidayResource {
         }
         Holiday result = holidayService.save(holiday);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, holiday.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, holiday.getId().toString()))
+                .body(result);
     }
 
     /**
-     * GET  /holidays : get all the holidays.
+     * GET /holidays : get all the holidays.
      *
      * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of holidays in body
+     * @return the ResponseEntity with status 200 (OK) and the list of holidays
+     * in body
      */
     @GetMapping("/holidays")
     public ResponseEntity<List<Holiday>> getAllHolidays(Pageable pageable) {
@@ -93,10 +117,11 @@ public class HolidayResource {
     }
 
     /**
-     * GET  /holidays/:id : get the "id" holiday.
+     * GET /holidays/:id : get the "id" holiday.
      *
      * @param id the id of the holiday to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the holiday, or with status 404 (Not Found)
+     * @return the ResponseEntity with status 200 (OK) and with body the
+     * holiday, or with status 404 (Not Found)
      */
     @GetMapping("/holidays/{id}")
     public ResponseEntity<Holiday> getHoliday(@PathVariable Long id) {
@@ -106,7 +131,7 @@ public class HolidayResource {
     }
 
     /**
-     * DELETE  /holidays/:id : delete the "id" holiday.
+     * DELETE /holidays/:id : delete the "id" holiday.
      *
      * @param id the id of the holiday to delete
      * @return the ResponseEntity with status 200 (OK)
