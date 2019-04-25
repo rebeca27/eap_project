@@ -75,6 +75,14 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
     this.props.history.push('/entity/holiday');
   };
 
+  disableReason = ev => {
+    if (ev.target.value !== 'sick_leave') {
+      document.getElementById('holiday-reason').setAttribute('disabled', 'true');
+    } else {
+      document.getElementById('holiday-reason').removeAttribute('disabled');
+    }
+  };
+
   render() {
     const { holidayEntity, employees, loading, updating } = this.props;
     const { isNew } = this.state;
@@ -113,7 +121,14 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                 </AvGroup>
                 <AvGroup>
                   <Label for="holidayType">Holiday Type</Label>
-                  <AvInput id="holiday-type" type="select" className="form-control" name="holidayType">
+                  <AvInput
+                    id="holiday-type"
+                    type="select"
+                    className="form-control"
+                    name="holidayType"
+                    ref="holiday-type"
+                    onChange={this.disableReason.bind(this)}
+                  >
                     <option value="" key="0" />
                     {this.state.holidayTypes
                       ? this.state.holidayTypes.map(otherEntity => (
@@ -124,19 +139,6 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                       : null}
                   </AvInput>
                 </AvGroup>
-                {holidayEntity.type === 'sick_leave' ? (
-                  <AvGroup>
-                    <Label id="reasonLabel" for="reason">
-                      Reason
-                    </Label>
-                    <AvField
-                      id="holiday-reason"
-                      type="text"
-                      name="reason"
-                      validate={{ maxLength: { value: 255, errorMessage: 'This field cannot be longer than 255 characters.' } }}
-                    />
-                  </AvGroup>
-                ) : null}
                 <AvGroup>
                   <Label id="startDateLabel" for="startDate">
                     Start Date
@@ -182,6 +184,19 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                       required: { value: true, errorMessage: 'This field is required.' },
                       number: { value: true, errorMessage: 'This field should be a number.' }
                     }}
+                  />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="reasonLabel" for="reason">
+                    Reason
+                  </Label>
+                  <AvField
+                    id="holiday-reason"
+                    type="text"
+                    name="reason"
+                    ref="reason"
+                    disabled
+                    validate={{ maxLength: { value: 255, errorMessage: 'This field cannot be longer than 255 characters.' } }}
                   />
                 </AvGroup>
                 <AvGroup>
