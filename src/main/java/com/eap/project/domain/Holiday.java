@@ -18,7 +18,7 @@ import java.util.Objects;
 @Table(name = "holiday")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "holiday_type")
-@DiscriminatorValue(value = "default")
+//@DiscriminatorValue(value = "rest_leave")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Holiday implements Serializable {
 

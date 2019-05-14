@@ -100,7 +100,13 @@ export class Holiday extends React.Component<IHolidayProps, IHolidayState> {
                   </td>
                   <td>{holiday.workingDays}</td>
                   <td>{holiday.remarks}</td>
-                  <td>{holiday.employee ? <Link to={`employee/${holiday.employee.id}`}>{holiday.employee.id}</Link> : ''}</td>
+                  <td>
+                    {holiday.employee ? (
+                      <Link to={`employee/${holiday.employee.id}`}>{holiday.employee.firstName + ' ' + holiday.employee.lastName}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${holiday.id}`} color="info" size="sm">

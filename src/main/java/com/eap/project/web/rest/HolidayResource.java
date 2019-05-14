@@ -79,7 +79,7 @@ public class HolidayResource {
         if (holiday.getId() != null) {
             throw new BadRequestAlertException("A new holiday cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        
+
         Holiday result = holidayService.save(holiday);
 
         return ResponseEntity.created(
@@ -100,7 +100,28 @@ public class HolidayResource {
      */
     @PutMapping("/holidays")
     public ResponseEntity<Holiday> updateHoliday(@Valid
-            @RequestBody Holiday holiday) throws URISyntaxException {
+            @RequestBody HolidayRequest holidayRequest) throws URISyntaxException {
+        Holiday holiday;
+
+        holiday = holidayRequest.getHolidayType().equals("sick_leave")
+                ? new SickLeaveHoliday(
+                        holidayRequest.getId(),
+                        holidayRequest.getStartDate(),
+                        holidayRequest.getEndDate(),
+                        holidayRequest.getWorkingDays(),
+                        holidayRequest.getRemarks(),
+                        holidayRequest.getEmployee(),
+                        holidayRequest.getHolidayReason()
+                )
+                : new RestLeaveHoliday(
+                        holidayRequest.getId(),
+                        holidayRequest.getStartDate(),
+                        holidayRequest.getEndDate(),
+                        holidayRequest.getWorkingDays(),
+                        holidayRequest.getRemarks(),
+                        holidayRequest.getEmployee()
+                );
+
         log.debug("REST request to update Holiday : {}", holiday);
         if (holiday.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
