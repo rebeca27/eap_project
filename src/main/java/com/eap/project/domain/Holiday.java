@@ -1,6 +1,5 @@
 package com.eap.project.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -17,12 +16,14 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "holiday")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "holiday_type")
+@DiscriminatorValue(value = "default")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public abstract class Holiday implements Serializable {
+public class Holiday implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,9 +44,25 @@ public abstract class Holiday implements Serializable {
     @Column(name = "remarks", length = 255)
     private String remarks;
 
+    @Size(max = 255)
+    @Column(name = "reason", length = 255)
+    private String reason;
+
     @ManyToOne
     @JsonIgnoreProperties("employees")
     private Employee employee;
+
+    public Holiday() {
+    }
+
+    public Holiday(Long id, Instant startDate, Instant endDate, Integer workingDays, String remarks, String reason, Employee employee) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.workingDays = workingDays;
+        this.remarks = remarks;
+        this.employee = employee;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -120,8 +137,16 @@ public abstract class Holiday implements Serializable {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -144,12 +169,12 @@ public abstract class Holiday implements Serializable {
 
     @Override
     public String toString() {
-        return "Holiday{" +
-            "id=" + getId() +
-            ", startDate='" + getStartDate() + "'" +
-            ", endDate='" + getEndDate() + "'" +
-            ", workingDays=" + getWorkingDays() +
-            ", remarks='" + getRemarks() + "'" +
-            "}";
+        return "Holiday{"
+                + "id=" + getId()
+                + ", startDate='" + getStartDate() + "'"
+                + ", endDate='" + getEndDate() + "'"
+                + ", workingDays=" + getWorkingDays()
+                + ", remarks='" + getRemarks() + "'"
+                + "}";
     }
 }

@@ -57,24 +57,33 @@ public class HolidayResource {
         log.debug("REST request to save Holiday : {}", holidayRequest);
         Holiday holiday;
 
-        if (holidayRequest.getHolidayType().equals("sick_leave")) {
-            holiday = new SickLeaveHoliday();
-            ((SickLeaveHoliday) holiday).setReason(holidayRequest.getHolidayReason());
-        } else {
-            holiday = new RestLeaveHoliday();
-        }
-
-        holiday.setEmployee(holidayRequest.getEmployee());
-        holiday.setEndDate(holidayRequest.getEndDate());
-        holiday.setStartDate(holidayRequest.getStartDate());
-        holiday.setRemarks(holidayRequest.getRemarks());
-        holiday.setWorkingDays(holidayRequest.getWorkingDays());
+        holiday = holidayRequest.getHolidayType().equals("sick_leave")
+                ? new SickLeaveHoliday(
+                        null,
+                        holidayRequest.getStartDate(),
+                        holidayRequest.getEndDate(),
+                        holidayRequest.getWorkingDays(),
+                        holidayRequest.getRemarks(),
+                        holidayRequest.getEmployee(),
+                        holidayRequest.getHolidayReason()
+                )
+                : new RestLeaveHoliday(
+                        null,
+                        holidayRequest.getStartDate(),
+                        holidayRequest.getEndDate(),
+                        holidayRequest.getWorkingDays(),
+                        holidayRequest.getRemarks(),
+                        holidayRequest.getEmployee()
+                );
 
         if (holiday.getId() != null) {
             throw new BadRequestAlertException("A new holiday cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
         Holiday result = holidayService.save(holiday);
-        return ResponseEntity.created(new URI("/api/holidays/" + result.getId()))
+
+        return ResponseEntity.created(
+                new URI("/api/holidays/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
                 .body(result);
     }
@@ -90,7 +99,8 @@ public class HolidayResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/holidays")
-    public ResponseEntity<Holiday> updateHoliday(@Valid @RequestBody Holiday holiday) throws URISyntaxException {
+    public ResponseEntity<Holiday> updateHoliday(@Valid
+            @RequestBody Holiday holiday) throws URISyntaxException {
         log.debug("REST request to update Holiday : {}", holiday);
         if (holiday.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

@@ -1,39 +1,34 @@
 package com.eap.project.domain;
 
-
+import com.eap.project.domain.enumeration.LeaveTypes;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
  * A RestLeaveHoliday.
  */
 @Entity
-@Table(name = "rest_leave_holiday")
-@PrimaryKeyJoinColumn(name = "id")
+@DiscriminatorValue(value = "rest_leave")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class RestLeaveHoliday extends Holiday implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    public RestLeaveHoliday() {
+    }
+
+    public RestLeaveHoliday(Long id, Instant startDate, Instant endDate, Integer workingDays, String remarks, Employee employee) {
+        super(id, startDate, endDate, workingDays, remarks, null, employee);
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -56,8 +51,8 @@ public class RestLeaveHoliday extends Holiday implements Serializable {
 
     @Override
     public String toString() {
-        return "RestLeaveHoliday{" +
-            "id=" + getId() +
-            "}";
+        return "RestLeaveHoliday{"
+                + "id=" + getId()
+                + "}";
     }
 }
