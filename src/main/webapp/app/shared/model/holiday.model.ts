@@ -9,6 +9,7 @@ export interface IHoliday {
   remarks?: string;
   employee?: IEmployee;
   type?: string;
+  holidayType?: string;
   reason?: string;
 }
 
