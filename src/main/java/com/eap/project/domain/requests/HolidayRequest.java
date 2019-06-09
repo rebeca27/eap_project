@@ -36,7 +36,7 @@ public class HolidayRequest {
 
     public String holidayType;
 
-    public String holidayReason;
+    public String reason;
 
     public Long getId() {
         return id;
@@ -94,12 +94,12 @@ public class HolidayRequest {
         this.holidayType = holidayType;
     }
 
-    public String getHolidayReason() {
-        return holidayReason;
+    public String getReason() {
+        return reason;
     }
 
-    public void setHolidayReason(String holidayReason) {
-        this.holidayReason = holidayReason;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
 }

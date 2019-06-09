@@ -61,6 +61,7 @@ public class Holiday implements Serializable {
         this.endDate = endDate;
         this.workingDays = workingDays;
         this.remarks = remarks;
+        this.reason = reason;
         this.employee = employee;
     }
 
@@ -154,7 +155,6 @@ public class Holiday implements Serializable {
         return this.getClass().getName().equals(RestLeaveHoliday.class.getName()) ? "rest_leave" : "sick_leave";
     }
 
-    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
     @Override
     public boolean equals(Object o) {

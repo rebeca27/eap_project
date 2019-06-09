@@ -65,7 +65,7 @@ public class HolidayResource {
                         holidayRequest.getWorkingDays(),
                         holidayRequest.getRemarks(),
                         holidayRequest.getEmployee(),
-                        holidayRequest.getHolidayReason()
+                        holidayRequest.getReason()
                 )
                 : new RestLeaveHoliday(
                         null,
