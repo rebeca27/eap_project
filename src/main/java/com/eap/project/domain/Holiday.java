@@ -61,6 +61,7 @@ public class Holiday implements Serializable {
         this.endDate = endDate;
         this.workingDays = workingDays;
         this.remarks = remarks;
+        this.reason = reason;
         this.employee = employee;
     }
 
@@ -144,6 +145,14 @@ public class Holiday implements Serializable {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getType() {
+        return this.getClass().getName().equals(RestLeaveHoliday.class.getName()) ? "rest_leave" : "sick_leave";
+    }
+    
+    public String getHolidayType() {
+        return this.getClass().getName().equals(RestLeaveHoliday.class.getName()) ? "rest_leave" : "sick_leave";
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

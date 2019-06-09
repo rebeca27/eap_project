@@ -193,7 +193,7 @@ export class HolidayUpdate extends React.Component<IHolidayUpdateProps, IHoliday
                     id="holiday-reason"
                     type="text"
                     name="reason"
-                    disabled
+                    disabled={holidayEntity.holidayType !== 'sick_leave'}
                     validate={{ maxLength: { value: 255, errorMessage: 'This field cannot be longer than 255 characters.' } }}
                   />
                 </AvGroup>

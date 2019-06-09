@@ -65,7 +65,7 @@ public class HolidayResource {
                         holidayRequest.getWorkingDays(),
                         holidayRequest.getRemarks(),
                         holidayRequest.getEmployee(),
-                        holidayRequest.getHolidayReason()
+                        holidayRequest.getReason()
                 )
                 : new RestLeaveHoliday(
                         null,
@@ -99,8 +99,7 @@ public class HolidayResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/holidays")
-    public ResponseEntity<Holiday> updateHoliday(@Valid
-            @RequestBody HolidayRequest holidayRequest) throws URISyntaxException {
+    public ResponseEntity<Holiday> updateHoliday(@Valid @RequestBody HolidayRequest holidayRequest) throws URISyntaxException {
         Holiday holiday;
 
         holiday = holidayRequest.getHolidayType().equals("sick_leave")
@@ -111,7 +110,7 @@ public class HolidayResource {
                         holidayRequest.getWorkingDays(),
                         holidayRequest.getRemarks(),
                         holidayRequest.getEmployee(),
-                        holidayRequest.getHolidayReason()
+                        holidayRequest.getReason()
                 )
                 : new RestLeaveHoliday(
                         holidayRequest.getId(),

@@ -75,8 +75,12 @@ export class Holiday extends React.Component<IHolidayProps, IHolidayState> {
                 <th className="hand" onClick={this.sort('workingDays')}>
                   Working Days <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand">Type</th>
                 <th className="hand" onClick={this.sort('remarks')}>
                   Remarks <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={this.sort('remarks')}>
+                  Reason <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   Employee <FontAwesomeIcon icon="sort" />
@@ -99,6 +103,7 @@ export class Holiday extends React.Component<IHolidayProps, IHolidayState> {
                     <TextFormat type="date" value={holiday.endDate} format={APP_DATE_FORMAT} />
                   </td>
                   <td>{holiday.workingDays}</td>
+                  <td>{holiday.type === 'rest_leave' ? 'Rest Leave' : 'Sick Leave'}</td>
                   <td>{holiday.remarks}</td>
                   <td>
                     {holiday.employee ? (
