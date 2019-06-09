@@ -41,6 +41,10 @@ export class HolidayDetail extends React.Component<IHolidayDetailProps> {
               <TextFormat value={holidayEntity.endDate} type="date" format={APP_DATE_FORMAT} />
             </dd>
             <dt>
+              <span id="remarks">Type</span>
+            </dt>
+            <dd>{holidayEntity.type === 'rest_leave' ? 'Rest Leave' : 'Sick Leave'}</dd>
+            <dt>
               <span id="workingDays">Working Days</span>
             </dt>
             <dd>{holidayEntity.workingDays}</dd>
@@ -48,6 +52,10 @@ export class HolidayDetail extends React.Component<IHolidayDetailProps> {
               <span id="remarks">Remarks</span>
             </dt>
             <dd>{holidayEntity.remarks}</dd>
+            <dt>
+              <span id="remarks">Reason</span>
+            </dt>
+            <dd>{holidayEntity.reason || '-'}</dd>
             <dt>Employee</dt>
             <dd>{holidayEntity.employee ? `${holidayEntity.employee.firstName} ${holidayEntity.employee.lastName}` : ''}</dd>
           </dl>
