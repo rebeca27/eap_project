@@ -105,6 +105,7 @@ export class Holiday extends React.Component<IHolidayProps, IHolidayState> {
                   <td>{holiday.workingDays}</td>
                   <td>{holiday.type === 'rest_leave' ? 'Rest Leave' : 'Sick Leave'}</td>
                   <td>{holiday.remarks}</td>
+                  <td>{holiday.reason}</td>
                   <td>
                     {holiday.employee ? (
                       <Link to={`employee/${holiday.employee.id}`}>{holiday.employee.firstName + ' ' + holiday.employee.lastName}</Link>
