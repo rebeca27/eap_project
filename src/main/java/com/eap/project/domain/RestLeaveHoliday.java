@@ -1,6 +1,5 @@
 package com.eap.project.domain;
 
-import com.eap.project.domain.enumeration.LeaveTypes;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
